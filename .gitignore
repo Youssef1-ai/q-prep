@@ -1,0 +1,24 @@
+# Virtual environment (1.8 GB, machine-specific -- never commit)
+.venv/
+venv/
+env/
+
+# Python bytecode / caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Build artifacts (the wheel in dist/ is committed on purpose)
+build/
+*.egg
+
+# Local data and secrets
+qm9.csv
+*.csv.tmp
+.env
+
+# Streamlit / OS
+.streamlit/secrets.toml
+.DS_Store

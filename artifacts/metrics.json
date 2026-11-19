@@ -1,0 +1,84 @@
+{
+  "dataset": "QM9 CSV: /home/joseph/Downloads/qm9.csv (n=133885) -- converted homo/lumo/gap from Hartree to eV; clipped 134 A outliers at 17.858; clipped 134 B outliers at 4.369; clipped 134 C outliers at 3.446",
+  "n_train": 107108,
+  "n_test": 26777,
+  "latent_dim": 3,
+  "physics_weight": 5.0,
+  "epochs_run": 80,
+  "acceptance_threshold_ev": 0.05000000074505806,
+  "violation_reduction_percent": -64147.22370429369,
+  "caveat": "PCA is linear, so it preserves the linear identity gap = lumo - homo by construction; the PINN's advantage here is reconstruction fidelity.",
+  "metrics": {
+    "Original (uncompressed)": {
+      "method": "Original (uncompressed)",
+      "recon_mse_standardized": 0.0,
+      "recon_mse_physical": 0.0,
+      "electronics_mse_ev2": 0.0,
+      "violation_mean_ev": 0.0006860517180668315,
+      "violation_std_ev": 0.0011815984379816681,
+      "violation_p95_ev": 0.0027211386245991065,
+      "violation_max_ev": 0.002721138624600883
+    },
+    "PCA (3 components)": {
+      "method": "PCA (3 components)",
+      "recon_mse_standardized": 0.2389249160760175,
+      "recon_mse_physical": 706.2394029527799,
+      "electronics_mse_ev2": 0.27391954895565984,
+      "violation_mean_ev": 7.632003023033539e-06,
+      "violation_std_ev": 5.756006183761279e-06,
+      "violation_p95_ev": 1.849310936847813e-05,
+      "violation_max_ev": 5.0197028881981964e-05
+    },
+    "Physics-Informed AE (3D)": {
+      "method": "Physics-Informed AE (3D)",
+      "recon_mse_standardized": 0.08742730454738994,
+      "recon_mse_physical": 177.45787452074086,
+      "electronics_mse_ev2": 0.10428186748147306,
+      "violation_mean_ev": 0.004903350055326815,
+      "violation_std_ev": 0.004497474165211386,
+      "violation_p95_ev": 0.012906765937805164,
+      "violation_max_ev": 0.10317492485046387
+    }
+  },
+  "per_feature_mse_physical": {
+    "feature": [
+      "A",
+      "B",
+      "C",
+      "alpha",
+      "homo",
+      "lumo",
+      "gap",
+      "r2",
+      "zpve",
+      "cv",
+      "u0"
+    ],
+    "PCA (3 components)": [
+      0.6108360065262719,
+      0.017927086409830463,
+      0.008138886613300696,
+      17.08192192261507,
+      0.24154475333098183,
+      0.2783842891096802,
+      0.3018296044263179,
+      6903.685271113538,
+      0.000124206487050884,
+      2.330429499396161,
+      844.0770251120916
+    ],
+    "Physics-Informed AE (3D)": [
+      0.19076863543528505,
+      0.011738629453567032,
+      0.00577459268213322,
+      5.797785312485922,
+      0.06143656532047472,
+      0.10560221436874093,
+      0.14580682275520304,
+      1739.4097369984568,
+      0.00010218238032377068,
+      1.611790915853091,
+      204.6960768589589
+    ]
+  }
+}
