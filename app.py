@@ -10,6 +10,7 @@ Run:
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 from typing import Dict, Optional, Tuple
 
@@ -19,9 +20,12 @@ import plotly.express as px
 import streamlit as st
 from sklearn.decomposition import PCA
 
+ROOT = Path(__file__).resolve().parent
+# Works from a fresh clone / Streamlit Cloud where the package is not installed.
+sys.path.insert(0, str(ROOT / "src"))
+
 from molcompress import Compressor, FEATURE_NAMES, HARTREE_TO_EV
 
-ROOT = Path(__file__).resolve().parent
 ART = ROOT / "artifacts"
 MODEL_PATH = ART / "compressor.pt"
 EMB_PATH = ART / "test_embeddings.csv"
