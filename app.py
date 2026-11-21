@@ -62,42 +62,105 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-        .block-container { padding-top: 1.4rem; padding-bottom: 2rem; color: #111827; }
+        /* ---------- Global dark surface ---------- */
+        .block-container {
+            padding-top: 1.4rem;
+            padding-bottom: 2rem;
+            color: #CBD5E1;
+            background-color: #0E1117;
+        }
+        div[data-testid="stMarkdownContainer"] { color: #CBD5E1; }
+        div[data-testid="stMarkdownContainer"] h1,
+        div[data-testid="stMarkdownContainer"] h2,
+        div[data-testid="stMarkdownContainer"] h3,
+        div[data-testid="stMarkdownContainer"] h4 { color: #F8FAFC; }
+        h1, h2, h3, h4 { color: #F8FAFC; }
+        div[data-testid="stCaptionContainer"] { color: #CBD5E1; }
+        div[data-testid="stAlert"] { color: #F8FAFC; }
+
+        /* ---------- Sidebar ---------- */
+        section[data-testid="stSidebar"] {
+            background-color: #161B22;
+            border-right: 1px solid #30363D;
+        }
+        section[data-testid="stSidebar"] .stMarkdown,
+        section[data-testid="stSidebar"] div[data-testid="stMarkdownContainer"] { color: #CBD5E1; }
+        section[data-testid="stSidebar"] h1,
+        section[data-testid="stSidebar"] h2,
+        section[data-testid="stSidebar"] h3 { color: #F8FAFC; }
+        section[data-testid="stSidebar"] div[data-testid="stCaptionContainer"] { color: #CBD5E1; }
+        section[data-testid="stSidebar"] div[data-testid="stMetricLabel"] { color: #94A3B8; }
+        section[data-testid="stSidebar"] div[data-testid="stMetricValue"] {
+            color: #38BDF8;
+            font-weight: 700;
+        }
+
+        /* ---------- Tabs ---------- */
         .stTabs [data-baseweb="tab-list"] { gap: 1.4rem; }
-        .stTabs [data-baseweb="tab"] { font-size: 1.05rem; font-weight: 700; color: #4f46e5; }
-        .stTabs [data-baseweb="tab"]:hover { color: #312e81; }
-        .stTabs [data-baseweb="tab"][aria-selected="true"] { color: #312e81; }
-        .stTabs [data-baseweb="tab-highlight"] { background-color: #4f46e5; }
-        div[data-testid="stMetricValue"] { font-size: 1.5rem; color: #111827; font-weight: 700; }
-        div[data-testid="stMetricLabel"] { font-size: 0.88rem; color: #374151; font-weight: 600; }
-        div[data-testid="stCaptionContainer"] { color: #374151; }
+        .stTabs [data-baseweb="tab"] {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #E2E8F0;
+        }
+        .stTabs [data-baseweb="tab"]:hover { color: #38BDF8; }
+        .stTabs [data-baseweb="tab"][aria-selected="true"] { color: #38BDF8; }
+        .stTabs [data-baseweb="tab-highlight"] { background-color: #38BDF8; }
+
+        /* ---------- Metric cards ---------- */
+        div[data-testid="stMetric"] {
+            background-color: #161B22;
+            border: 1px solid #30363D;
+            border-radius: 0.6rem;
+            padding: 0.6rem 0.8rem;
+        }
+        div[data-testid="stMetricValue"] {
+            font-size: 1.5rem;
+            color: #F8FAFC;
+            font-weight: 700;
+        }
+        div[data-testid="stMetricLabel"] {
+            font-size: 0.88rem;
+            color: #94A3B8;
+            font-weight: 600;
+        }
+
+        /* ---------- Radios / buttons ---------- */
+        div[data-testid="stRadio"] label { color: #E2E8F0; }
         div[data-testid="stButton"] button[kind="primary"] {
-            background-color: #4338ca;
-            color: #ffffff;
-            border: 1px solid #3730a3;
+            background-color: #0EA5E9;
+            color: #F8FAFC;
+            border: 1px solid #38BDF8;
             font-weight: 700;
         }
         div[data-testid="stButton"] button[kind="primary"]:hover {
-            background-color: #3730a3;
-            color: #ffffff;
+            background-color: #38BDF8;
+            color: #0E1117;
         }
+
+        /* ---------- Screening result cards ---------- */
         .qcard {
             padding: 0.9rem 1rem;
             border-radius: 0.75rem;
             border-left: 7px solid;
+            background-color: #161B22;
+            border-top: 1px solid #30363D;
+            border-right: 1px solid #30363D;
+            border-bottom: 1px solid #30363D;
             margin-bottom: 0.6rem;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.35);
         }
-        .qcard-title { font-weight: 700; font-size: 1.02rem; color: #111827; }
+        .qcard-title { font-weight: 700; font-size: 1.02rem; color: #F8FAFC; }
         .qcard-status { font-weight: 800; font-size: 1rem; margin-top: 0.25rem; }
-        .qcard-meta { font-size: 0.86rem; color: #374151; font-weight: 500; margin-top: 0.35rem; }
+        .qcard-meta { font-size: 0.86rem; color: #CBD5E1; font-weight: 500; margin-top: 0.35rem; }
+
+        /* ---------- Hero banner ---------- */
         .qhero {
             padding: 1.1rem 1.2rem;
             border-radius: 0.9rem;
-            background: linear-gradient(135deg, #e0e7ff 0%, #f1f5f9 100%);
-            border: 2px solid #a5b4fc;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            border: 1px solid #334155;
             margin-bottom: 1rem;
-            color: #1e1b4b;
+            color: #F8FAFC;
         }
     </style>
     """,
@@ -199,8 +262,8 @@ def qprep_engine(X: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
 
 def result_card(row: pd.Series, threshold: float) -> str:
     approved = float(row["error"]) < threshold
-    color = "#15803d" if approved else "#b91c1c"
-    bg = "#dcfce7" if approved else "#fee2e2"
+    color = "#10B981" if approved else "#F43F5E"
+    bg = "rgba(16, 185, 129, 0.12)" if approved else "rgba(244, 63, 94, 0.12)"
     status = APPROVED_TEXT if approved else REJECTED_TEXT
     sid = row.get("sample_id", "—")
     return f"""
@@ -292,9 +355,9 @@ st.sidebar.caption("Model weights are loaded from `artifacts/compressor.pt` and 
 # --------------------------------------------------------------------------- #
 st.markdown(
     '<div class="qhero">'
-    '<h1 style="margin:0 0 0.35rem 0;">Q-PREP</h1>'
-    '<h3 style="margin:0;color:#3730a3;">A PIDR-QML System for Drug Screening</h3>'
-    '<p style="margin:0.5rem 0 0 0;">Compress 11 molecular descriptors into a '
+    '<h1 style="margin:0 0 0.35rem 0;color:#F8FAFC;">Q-PREP</h1>'
+    '<h3 style="margin:0;color:#38BDF8;">A PIDR-QML System for Drug Screening</h3>'
+    '<p style="margin:0.5rem 0 0 0;color:#CBD5E1;">Compress 11 molecular descriptors into a '
     '3D quantum-ready latent space, reconstruct them through a trained physics-informed '
     'autoencoder, and screen for HOMO-LUMO instability before real-world trials.</p>'
     '</div>',
@@ -456,14 +519,27 @@ with tab_space:
         opacity=0.95,
     )
     fig.update_traces(marker=dict(size=4, line=dict(width=0)))
+    axis_style = dict(
+        color="#CBD5E1",
+        gridcolor="#30363D",
+        zerolinecolor="#475569",
+        showbackground=True,
+        backgroundcolor="#0E1117",
+        tickfont=dict(color="#CBD5E1"),
+    )
     fig.update_layout(
         height=650,
         margin=dict(l=0, r=0, b=0, t=30),
+        font=dict(color="#CBD5E1"),
         scene=dict(
-            xaxis_title="z₁", yaxis_title="z₂", zaxis_title="z₃",
+            xaxis=dict(title=dict(text="z₁", font=dict(color="#E2E8F0")), **axis_style),
+            yaxis=dict(title=dict(text="z₂", font=dict(color="#E2E8F0")), **axis_style),
+            zaxis=dict(title=dict(text="z₃", font=dict(color="#E2E8F0")), **axis_style),
             aspectmode="cube",
         ),
         paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        legend=dict(font=dict(color="#CBD5E1")),
     )
     st.plotly_chart(fig, width="stretch")
 
@@ -547,16 +623,25 @@ with tab_validation:
             y="Mean violation (eV)",
             color="Method",
             text="Mean violation (eV)",
-            color_discrete_map={"Q-PREP (PINN)": "#15803d", "PCA (3 components)": "#4f46e5"},
+            color_discrete_map={"Q-PREP (PINN)": "#10B981", "PCA (3 components)": "#38BDF8"},
             labels={"Mean violation (eV)": "Mean |(LUMO − HOMO) − GAP| (eV)"},
             title="Physics Violation Score — lower is better",
         )
         bar.update_traces(texttemplate="%{text:.6f} eV", textposition="outside")
         bar.add_hline(
-            y=threshold, line_dash="dash", line_color="#dc2626",
+            y=threshold, line_dash="dash", line_color="#F43F5E",
             annotation_text=f"Rejection threshold {threshold:.3f} eV",
+            annotation_font=dict(color="#F8FAFC"),
         )
-        bar.update_layout(height=430, showlegend=False, margin=dict(t=70, b=40))
+        bar.update_layout(
+            height=430, showlegend=False, margin=dict(t=70, b=40),
+            font=dict(color="#CBD5E1"),
+            title_font=dict(color="#F8FAFC"),
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            xaxis=dict(color="#E2E8F0", gridcolor="#30363D"),
+            yaxis=dict(color="#E2E8F0", gridcolor="#30363D"),
+        )
         st.plotly_chart(bar, width="stretch")
 
         st.markdown(
