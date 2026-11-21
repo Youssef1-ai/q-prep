@@ -64,7 +64,10 @@ st.markdown(
     <style>
         .block-container { padding-top: 1.4rem; padding-bottom: 2rem; color: #111827; }
         .stTabs [data-baseweb="tab-list"] { gap: 1.4rem; }
-        .stTabs [data-baseweb="tab"] { font-size: 1.05rem; font-weight: 700; color: #312e81; }
+        .stTabs [data-baseweb="tab"] { font-size: 1.05rem; font-weight: 700; color: #4f46e5; }
+        .stTabs [data-baseweb="tab"]:hover { color: #312e81; }
+        .stTabs [data-baseweb="tab"][aria-selected="true"] { color: #312e81; }
+        .stTabs [data-baseweb="tab-highlight"] { background-color: #4f46e5; }
         div[data-testid="stMetricValue"] { font-size: 1.5rem; color: #111827; font-weight: 700; }
         div[data-testid="stMetricLabel"] { font-size: 0.88rem; color: #374151; font-weight: 600; }
         div[data-testid="stCaptionContainer"] { color: #374151; }
