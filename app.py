@@ -62,27 +62,39 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-        .block-container { padding-top: 1.4rem; padding-bottom: 2rem; }
+        .block-container { padding-top: 1.4rem; padding-bottom: 2rem; color: #111827; }
         .stTabs [data-baseweb="tab-list"] { gap: 1.4rem; }
-        .stTabs [data-baseweb="tab"] { font-size: 1.05rem; font-weight: 650; }
-        div[data-testid="stMetricValue"] { font-size: 1.5rem; }
-        div[data-testid="stMetricLabel"] { font-size: 0.86rem; }
+        .stTabs [data-baseweb="tab"] { font-size: 1.05rem; font-weight: 700; color: #312e81; }
+        div[data-testid="stMetricValue"] { font-size: 1.5rem; color: #111827; font-weight: 700; }
+        div[data-testid="stMetricLabel"] { font-size: 0.88rem; color: #374151; font-weight: 600; }
+        div[data-testid="stCaptionContainer"] { color: #374151; }
+        div[data-testid="stButton"] button[kind="primary"] {
+            background-color: #4338ca;
+            color: #ffffff;
+            border: 1px solid #3730a3;
+            font-weight: 700;
+        }
+        div[data-testid="stButton"] button[kind="primary"]:hover {
+            background-color: #3730a3;
+            color: #ffffff;
+        }
         .qcard {
             padding: 0.9rem 1rem;
             border-radius: 0.75rem;
-            border-left: 6px solid;
+            border-left: 7px solid;
             margin-bottom: 0.6rem;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
         }
-        .qcard-title { font-weight: 700; font-size: 1.02rem; }
-        .qcard-status { font-weight: 750; font-size: 0.98rem; margin-top: 0.25rem; }
-        .qcard-meta { font-size: 0.84rem; opacity: 0.88; margin-top: 0.35rem; }
+        .qcard-title { font-weight: 700; font-size: 1.02rem; color: #111827; }
+        .qcard-status { font-weight: 800; font-size: 1rem; margin-top: 0.25rem; }
+        .qcard-meta { font-size: 0.86rem; color: #374151; font-weight: 500; margin-top: 0.35rem; }
         .qhero {
             padding: 1.1rem 1.2rem;
             border-radius: 0.9rem;
-            background: linear-gradient(135deg, #eef2ff 0%, #f8fafc 100%);
-            border: 1px solid #dbe3ff;
+            background: linear-gradient(135deg, #e0e7ff 0%, #f1f5f9 100%);
+            border: 2px solid #a5b4fc;
             margin-bottom: 1rem;
+            color: #1e1b4b;
         }
     </style>
     """,
@@ -184,8 +196,8 @@ def qprep_engine(X: np.ndarray) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
 
 def result_card(row: pd.Series, threshold: float) -> str:
     approved = float(row["error"]) < threshold
-    color = "#16a34a" if approved else "#dc2626"
-    bg = "#ecfdf5" if approved else "#fef2f2"
+    color = "#15803d" if approved else "#b91c1c"
+    bg = "#dcfce7" if approved else "#fee2e2"
     status = APPROVED_TEXT if approved else REJECTED_TEXT
     sid = row.get("sample_id", "—")
     return f"""
@@ -278,7 +290,7 @@ st.sidebar.caption("Model weights are loaded from `artifacts/compressor.pt` and 
 st.markdown(
     '<div class="qhero">'
     '<h1 style="margin:0 0 0.35rem 0;">Q-PREP</h1>'
-    '<h3 style="margin:0;color:#4338ca;">A PIDR-QML System for Drug Screening</h3>'
+    '<h3 style="margin:0;color:#3730a3;">A PIDR-QML System for Drug Screening</h3>'
     '<p style="margin:0.5rem 0 0 0;">Compress 11 molecular descriptors into a '
     '3D quantum-ready latent space, reconstruct them through a trained physics-informed '
     'autoencoder, and screen for HOMO-LUMO instability before real-world trials.</p>'
@@ -340,7 +352,7 @@ with tab_screener:
     st.dataframe(active.head(10), width="stretch", hide_index=True)
 
     st.markdown("---")
-    run = st.button("🚀 Run Q-PREP Engine", type="primary")
+    run = st.button("Run Q-PREP Engine", type="primary")
     if run:
         with st.spinner("Running real PyTorch encoder and decoder ..."):
             X = active.loc[:, list(FEATURE_NAMES)].to_numpy(dtype=np.float64)
@@ -438,7 +450,7 @@ with tab_space:
         labels={**UNITS, "z1": "Latent z₁", "z2": "Latent z₂", "z3": "Latent z₃",
                 color_col: "Energy / violation (eV)"},
         color_continuous_scale="RdYlGn_r",
-        opacity=0.88,
+        opacity=0.95,
     )
     fig.update_traces(marker=dict(size=4, line=dict(width=0)))
     fig.update_layout(
@@ -532,7 +544,7 @@ with tab_validation:
             y="Mean violation (eV)",
             color="Method",
             text="Mean violation (eV)",
-            color_discrete_map={"Q-PREP (PINN)": "#2ca02c", "PCA (3 components)": "#636efa"},
+            color_discrete_map={"Q-PREP (PINN)": "#15803d", "PCA (3 components)": "#4f46e5"},
             labels={"Mean violation (eV)": "Mean |(LUMO − HOMO) − GAP| (eV)"},
             title="Physics Violation Score — lower is better",
         )
